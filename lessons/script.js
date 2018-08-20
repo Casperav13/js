@@ -1,6 +1,20 @@
-let money = prompt ("Ваш бюджет?");
-let name = prompt ("Название вашего магазина?");
-let time = 19;
+let money,
+    name,
+    time,
+    price
+
+function start(){
+    money = prompt ("Ваш бюджет?");
+    
+    while (isNaN(money) || money == '' || money == null){
+        money = prompt ("Ваш бюджет?");
+    }
+    
+    name = prompt ("Название вашего магазина?").toUpperCase();
+    time = 21;
+}
+
+start();
 
 let mainList = {
     budget: money, 
@@ -10,29 +24,35 @@ let mainList = {
     open: false
 }
 
-for (let i = 0; i < 5; i++){
-    
-    let a = prompt ("Какой тип товаров будем продавать?");
-    
-    
-    if ((typeof(a)) === 'string' && (typeof(a)) === null && a != '' && a.length < 50) {
-        console.log('Все верно!');
-        mainList.shopGoods[i] = a;
-    } else {
-        
-    }  
+function chooseGoods() {
+    for (let i = 0; i < 5; i++){
+
+        let a = prompt ("Какой тип товаров будем продавать?");
+
+
+        if ((typeof(a)) === 'string' && (typeof(a)) != null && a != '' && a.length < 50) {
+            console.log('Все верно!');
+            mainList.shopGoods[i] = a;
+        } else {
+            i = i - 1;
+        }  
+    }
+}
+chooseGoods();
+
+function workTime(time){
+    if (time < 0) {
+        console.log('Не может быть!');
+    } else if(time > 8 && time < 20) {
+        console.log('Рабочее время!');
+        } else if (time < 24){
+            console.log('Уже слишком поздно!');
+            } else {
+                console.log('В сутках всего 24 часа!');
+            };
 }
 
-if (time < 0) {
-    console.log('Не может быть!');
-} else if(time > 8 && time < 20) {
-    console.log('Рабочее время!');
-    } else if (time < 24){
-        console.log('Уже слишком поздно!');
-        } else {
-            console.log('В сутках всего 24 часа!');
-        };
+workTime(18);
 
-
-alert (mainList.budget / 30);
+alert ("Ежедневный бюджет " + mainList.budget / 30);
 console.log(mainList);
